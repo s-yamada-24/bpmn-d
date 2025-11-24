@@ -1,0 +1,62 @@
+/* Gateway-specific connection port positioning */
+/* Since gateways are rotated 45deg, ports need special positioning to align with diamond vertices */
+.bpmn-element.exclusive-gateway .connection-port,
+.bpmn-element.parallel-gateway .connection-port {
+    transform: rotate(-45deg);
+    /* Counter-rotate the port */
+}
+
+/* Top Port -> Top Vertex (Top-Left of unrotated square) */
+.bpmn-element.exclusive-gateway .connection-port.top,
+.bpmn-element.parallel-gateway .connection-port.top {
+    top: -5px;
+    left: -5px;
+    transform: rotate(-45deg);
+}
+
+/* Right Port -> Right Vertex (Top-Right of unrotated square) */
+.bpmn-element.exclusive-gateway .connection-port.right,
+.bpmn-element.parallel-gateway .connection-port.right {
+    top: -5px;
+    right: -5px;
+    transform: rotate(-45deg);
+}
+
+/* Bottom Port -> Bottom Vertex (Bottom-Right of unrotated square) */
+.bpmn-element.exclusive-gateway .connection-port.bottom,
+.bpmn-element.parallel-gateway .connection-port.bottom {
+    bottom: -5px;
+    right: -5px;
+    left: auto;
+    transform: rotate(-45deg);
+}
+
+/* Left Port -> Left Vertex (Bottom-Left of unrotated square) */
+.bpmn-element.exclusive-gateway .connection-port.left,
+.bpmn-element.parallel-gateway .connection-port.left {
+    bottom: -5px;
+    left: -5px;
+    top: auto;
+    transform: rotate(-45deg);
+}
+
+/* Hover states for gateway ports */
+.bpmn-element.exclusive-gateway .connection-port.top:hover,
+.bpmn-element.parallel-gateway .connection-port.top:hover {
+    transform: rotate(-45deg) scale(1.2);
+}
+
+.bpmn-element.exclusive-gateway .connection-port.right:hover,
+.bpmn-element.parallel-gateway .connection-port.right:hover {
+    transform: rotate(-45deg) scale(1.2);
+}
+
+.bpmn-element.exclusive-gateway .connection-port.bottom:hover,
+.bpmn-element.parallel-gateway .connection-port.bottom:hover {
+    transform: rotate(-45deg) scale(1.2);
+}
+
+.bpmn-element.exclusive-gateway .connection-port.left:hover,
+.bpmn-element.parallel-gateway .connection-port.left:hover {
+    transform: rotate(-45deg) scale(1.2);
+}

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BPMN 2.0 Editor</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/elements.css">
+    <link rel="stylesheet" href="css/connections.css">
+    <link rel="stylesheet" href="css/gateway-ports.css">
+    <link rel="stylesheet" href="css/export.css">
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="glass-header">
+            <div class="header-left">
+                <input type="text" id="diagram-name" class="diagram-name-input" value="Untitled Diagram"
+                    placeholder="Diagram Name">
+            </div>
+            <div class="header-right">
+                <div class="zoom-controls">
+                    <span id="zoom-level">100%</span>
+                </div>
+                <button class="primary-btn" id="import-btn">Import</button>
+                <button class="primary-btn" id="export-btn">Export</button>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Left Sidebar -->
+            <aside class="sidebar glass-panel" id="left-sidebar">
+                <!-- Top Section: Palette -->
+                <div class="sidebar-section palette-section">
+                    <div class="sidebar-header">
+                        <h3>Palette</h3>
+                    </div>
+                    <div class="palette-grid">
+                        <!-- Events -->
+                        <div class="palette-item" draggable="true" data-type="start-event" title="Start Event">
+                            <div class="icon start-event"></div>
+                        </div>
+                        <div class="palette-item" draggable="true" data-type="end-event" title="End Event">
+                            <div class="icon end-event"></div>
+                        </div>
+                        <div class="palette-item" draggable="true" data-type="intermediate-event"
+                            title="Intermediate Event">
+                            <div class="icon intermediate-event"></div>
+                        </div>
+                        <!-- Tasks -->
+                        <div class="palette-item" draggable="true" data-type="task" title="Task">
+                            <div class="icon task"></div>
+                        </div>
+                        <div class="palette-item" draggable="true" data-type="user-task" title="User Task">
+                            <div class="icon user-task"></div>
+                        </div>
+                        <div class="palette-item" draggable="true" data-type="service-task" title="Service Task">
+                            <div class="icon service-task"></div>
+                        </div>
+                        <!-- Gateways -->
+                        <div class="palette-item" draggable="true" data-type="exclusive-gateway"
+                            title="Exclusive Gateway">
+                            <div class="icon exclusive-gateway"></div>
+                        </div>
+                        <div class="palette-item" draggable="true" data-type="parallel-gateway"
+                            title="Parallel Gateway">
+                            <div class="icon parallel-gateway"></div>
+                        </div>
+                        <!-- Data -->
+                        <div class="palette-item" draggable="true" data-type="data-object" title="Data Object">
+                            <div class="icon data-object"></div>
+                        </div>
+                        <!-- System -->
+                        <div class="palette-item" draggable="true" data-type="system-object" title="System Object">
+                            <div class="icon system-object"></div>
+                        </div>
+                        <!-- Swimlanes -->
+                        <div class="palette-item" draggable="true" data-type="pool" title="Pool">
+                            <div class="icon pool"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Divider -->
+                <div class="sidebar-divider"></div>
+
+                <!-- Bottom Section: BPMN Explorer -->
+                <div class="sidebar-section explorer-section">
+                    <div class="sidebar-header">
+                        <h3>BPMN Explorer</h3>
+                    </div>
+                    <div class="explorer-tree" id="explorer-tree">
+                        <!-- Tree structure will be injected here -->
+                        <div class="tree-item active">
+                            <span class="tree-toggle">▼</span>
+                            <span class="tree-label">Main Process</span>
+                        </div>
+                        <div class="tree-children">
+                            <div class="tree-item">
+                                <span class="tree-toggle">▶</span>
+                                <span class="tree-label">Sub-process A</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="resizer" id="left-resizer"></div>
+            </aside>
+
+            <!-- Canvas -->
+            <section class="canvas-container" id="canvas-container">
+                <div id="canvas-content">
+                    <!-- Grid Layer (Bottom) -->
+                    <div class="canvas-background" id="grid-layer" style="background-size: 20px 20px;"></div>
+                    <!-- Pool Layer (Middle) -->
+                    <div id="pool-layer"></div>
+                    <!-- SVG Connections Layer -->
+                    <svg id="connections-layer">
+                        <defs>
+                            <marker id="arrowhead" markerWidth="14" markerHeight="10" refX="14" refY="5" orient="auto"
+                                markerUnits="userSpaceOnUse">
+                                <polygon points="0 0, 14 5, 0 10" fill="#00d4ff" />
+                            </marker>
+                        </defs>
+                    </svg>
+                    <!-- BPMN Elements Layer (Top) -->
+                    <div class="canvas-layer" id="canvas-layer"></div>
+                </div>
+            </section>
+
+            <!-- Right Sidebar: Properties -->
+            <aside class="sidebar glass-panel" id="right-sidebar">
+                <div class="resizer" id="right-resizer"></div>
+                <div class="sidebar-header">
+                    <h3>Properties</h3>
+                </div>
+                <div class="properties-content" id="properties-content">
+                    <p class="placeholder-text">Select an element</p>
+                </div>
+            </aside>
+        </main>
+    </div>
+
+    <script src="js/icons.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/exporter.js"></script>
+</body>
+
+</html>

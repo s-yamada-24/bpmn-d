@@ -1,0 +1,403 @@
+/* --- Connections --- */
+.connection-line {
+    fill: none;
+    stroke: var(--accent-color);
+    stroke-width: 2;
+    filter: drop-shadow(0 0 3px var(--accent-color));
+    pointer-events: visibleStroke;
+    /* Allow clicking on the line */
+    cursor: pointer;
+    transition: stroke-width 0.2s, filter 0.2s;
+}
+
+.connection-line:hover,
+.connection-line.selected {
+    stroke-width: 3;
+    filter: drop-shadow(0 0 6px var(--accent-color));
+    stroke: #fff;
+    /* Highlight on hover/select */
+}
+
+/* --- Connection Ports (4 directions) --- */
+.connection-port {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: var(--glass-bg);
+    border: 1px solid var(--accent-color);
+    border-radius: 50%;
+    z-index: 100;
+    opacity: 0;
+    /* Hidden by default */
+    transition: all 0.2s;
+    cursor: crosshair;
+}
+
+/* Show ports when hovering the element or the port itself */
+.bpmn-element:hover .connection-port,
+.connection-port:hover {
+    opacity: 1;
+}
+
+.connection-port:hover {
+    background: var(--accent-color);
+    box-shadow: 0 0 8px var(--accent-glow);
+    transform: scale(1.2);
+}
+
+/* Port Positions */
+.connection-port.top {
+    top: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.connection-port.right {
+    top: 50%;
+    right: -5px;
+    transform: translateY(-50%);
+}
+
+.connection-port.bottom {
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.connection-port.left {
+    top: 50%;
+    left: -5px;
+    transform: translateY(-50%);
+}
+
+/* Hover adjustments to keep centering */
+.connection-port.top:hover {
+    transform: translateX(-50%) scale(1.2);
+}
+
+.connection-port.right:hover {
+    transform: translateY(-50%) scale(1.2);
+}
+
+.connection-port.bottom:hover {
+    transform: translateX(-50%) scale(1.2);
+}
+
+.connection-port.left:hover {
+    transform: translateY(-50%) scale(1.2);
+}
+
+
+/* --- Connections --- */
+.connection-line {
+    fill: none;
+    stroke: var(--accent-color);
+    stroke-width: 2;
+    filter: drop-shadow(0 0 3px var(--accent-color));
+    pointer-events: visibleStroke;
+    /* Allow clicking on the line */
+    cursor: pointer;
+    transition: stroke-width 0.2s, filter 0.2s;
+}
+
+.connection-line:hover,
+.connection-line.selected {
+    stroke-width: 3;
+    filter: drop-shadow(0 0 6px var(--accent-color));
+    stroke: #fff;
+    /* Highlight on hover/select */
+}
+
+/* --- Connection Ports (4 directions) --- */
+.connection-port {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: var(--glass-bg);
+    border: 1px solid var(--accent-color);
+    border-radius: 50%;
+    z-index: 100;
+    opacity: 0;
+    /* Hidden by default */
+    transition: all 0.2s;
+    cursor: crosshair;
+}
+
+/* Show ports when hovering the element or the port itself */
+.bpmn-element:hover .connection-port,
+.connection-port:hover {
+    opacity: 1;
+}
+
+.connection-port:hover {
+    background: var(--accent-color);
+    box-shadow: 0 0 8px var(--accent-glow);
+    transform: scale(1.2);
+}
+
+/* Port Positions */
+.connection-port.top {
+    top: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.connection-port.right {
+    top: 50%;
+    right: -5px;
+    transform: translateY(-50%);
+}
+
+.connection-port.bottom {
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.connection-port.left {
+    top: 50%;
+    left: -5px;
+    transform: translateY(-50%);
+}
+
+/* Hover adjustments to keep centering */
+.connection-port.top:hover {
+    transform: translateX(-50%) scale(1.2);
+}
+
+.connection-port.right:hover {
+    transform: translateY(-50%) scale(1.2);
+}
+
+.connection-port.bottom:hover {
+    transform: translateX(-50%) scale(1.2);
+}
+
+.connection-port.left:hover {
+    transform: translateY(-50%) scale(1.2);
+}
+
+
+/* Dragging Line */
+.drag-line {
+    stroke: var(--accent-color);
+    stroke-width: 2;
+    stroke-dasharray: 5, 5;
+    opacity: 0.7;
+    pointer-events: none;
+}
+
+/* --- Connections --- */
+.connection-line {
+    fill: none;
+    stroke: var(--accent-color);
+    stroke-width: 2;
+    filter: drop-shadow(0 0 3px var(--accent-color));
+    pointer-events: visibleStroke;
+    /* Allow clicking on the line */
+    cursor: pointer;
+    transition: stroke-width 0.2s, filter 0.2s;
+}
+
+.connection-line:hover,
+.connection-line.selected {
+    stroke-width: 3;
+    filter: drop-shadow(0 0 6px var(--accent-color));
+    stroke: #fff;
+    /* Highlight on hover/select */
+}
+
+/* --- Connection Ports (4 directions) --- */
+.connection-port {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: var(--glass-bg);
+    border: 1px solid var(--accent-color);
+    border-radius: 50%;
+    z-index: 100;
+    opacity: 0;
+    /* Hidden by default */
+    transition: all 0.2s;
+    cursor: crosshair;
+}
+
+/* Show ports when hovering the element or the port itself */
+.bpmn-element:hover .connection-port,
+.connection-port:hover {
+    opacity: 1;
+}
+
+.connection-port:hover {
+    background: var(--accent-color);
+    box-shadow: 0 0 8px var(--accent-glow);
+    transform: scale(1.2);
+}
+
+/* Port Positions */
+.connection-port.top {
+    top: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.connection-port.right {
+    top: 50%;
+    right: -5px;
+    transform: translateY(-50%);
+}
+
+.connection-port.bottom {
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.connection-port.left {
+    top: 50%;
+    left: -5px;
+    transform: translateY(-50%);
+}
+
+/* Hover adjustments to keep centering */
+.connection-port.top:hover {
+    transform: translateX(-50%) scale(1.2);
+}
+
+.connection-port.right:hover {
+    transform: translateY(-50%) scale(1.2);
+}
+
+.connection-port.bottom:hover {
+    transform: translateX(-50%) scale(1.2);
+}
+
+.connection-port.left:hover {
+    transform: translateY(-50%) scale(1.2);
+}
+
+
+/* --- Connections --- */
+.connection-line {
+    fill: none;
+    stroke: var(--accent-color);
+    stroke-width: 2;
+    filter: drop-shadow(0 0 3px var(--accent-color));
+    pointer-events: visibleStroke;
+    /* Allow clicking on the line */
+    cursor: pointer;
+    transition: stroke-width 0.2s, filter 0.2s;
+}
+
+.connection-line:hover,
+.connection-line.selected {
+    stroke-width: 3;
+    filter: drop-shadow(0 0 6px var(--accent-color));
+    stroke: #fff;
+    /* Highlight on hover/select */
+}
+
+/* --- Connection Ports (4 directions) --- */
+.connection-port {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: var(--glass-bg);
+    border: 1px solid var(--accent-color);
+    border-radius: 50%;
+    z-index: 100;
+    opacity: 0;
+    /* Hidden by default */
+    transition: all 0.2s;
+    cursor: crosshair;
+}
+
+/* Show ports when hovering the element or the port itself */
+.bpmn-element:hover .connection-port,
+.connection-port:hover {
+    opacity: 1;
+}
+
+.connection-port:hover {
+    background: var(--accent-color);
+    box-shadow: 0 0 8px var(--accent-glow);
+    transform: scale(1.2);
+}
+
+/* Port Positions */
+.connection-port.top {
+    top: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.connection-port.right {
+    top: 50%;
+    right: -5px;
+    transform: translateY(-50%);
+}
+
+.connection-port.bottom {
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.connection-port.left {
+    top: 50%;
+    left: -5px;
+    transform: translateY(-50%);
+}
+
+/* Hover adjustments to keep centering */
+.connection-port.top:hover {
+    transform: translateX(-50%) scale(1.2);
+}
+
+.connection-port.right:hover {
+    transform: translateY(-50%) scale(1.2);
+}
+
+.connection-port.bottom:hover {
+    transform: translateX(-50%) scale(1.2);
+}
+
+.connection-port.left:hover {
+    transform: translateY(-50%) scale(1.2);
+}
+
+
+/* Dragging Line */
+.drag-line {
+    stroke: var(--accent-color);
+    stroke-width: 2;
+    stroke-dasharray: 5, 5;
+    opacity: 0.7;
+    pointer-events: none;
+}
+
+/* Dashed Line */
+.connection-line.dashed {
+    stroke-dasharray: 5, 5;
+}
+
+/* Connection Label */
+.connection-label {
+    position: absolute;
+    background: rgba(10, 12, 16, 0.4);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.6);
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    white-space: nowrap;
+    border: 1px solid var(--glass-border);
+    z-index: 102;
+    text-shadow: 0 0 2px #000;
+    display: none;
+}
+
+.connection-label.visible {
+    display: block;
+}

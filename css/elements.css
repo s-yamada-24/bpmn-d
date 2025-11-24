@@ -1,0 +1,429 @@
+/* --- Elements --- */
+.bpmn-element {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: grab;
+    z-index: 10;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.bpmn-element:active {
+    cursor: grabbing;
+}
+
+/* --- Events --- */
+.bpmn-element.start-event,
+.bpmn-element.end-event,
+.bpmn-element.intermediate-event {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: rgba(10, 12, 16, 0.6);
+    backdrop-filter: blur(4px);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+}
+
+.bpmn-element.start-event svg {
+    filter: drop-shadow(0 0 5px rgba(76, 175, 80, 0.8));
+    stroke: #4caf50;
+}
+
+.bpmn-element.end-event svg {
+    filter: drop-shadow(0 0 5px rgba(244, 67, 54, 0.8));
+    stroke: #f44336;
+    stroke-width: 3px;
+}
+
+.bpmn-element.intermediate-event svg {
+    filter: drop-shadow(0 0 5px rgba(255, 193, 7, 0.8));
+    stroke: #ffc107;
+}
+
+/* --- Tasks (Activities) --- */
+.bpmn-element.task,
+.bpmn-element.user-task,
+.bpmn-element.service-task {
+    width: 100px;
+    height: 60px;
+    border-radius: 6px;
+    background: rgba(15, 20, 30, 0.7);
+    border: 1px solid rgba(0, 212, 255, 0.5);
+    box-shadow:
+        0 0 10px rgba(0, 212, 255, 0.1),
+        inset 0 0 20px rgba(0, 212, 255, 0.05);
+    backdrop-filter: blur(5px);
+}
+
+.bpmn-element.task svg,
+.bpmn-element.user-task svg,
+.bpmn-element.service-task svg {
+    width: 40%;
+    height: 40%;
+    stroke: var(--accent-color);
+    filter: drop-shadow(0 0 2px var(--accent-color));
+}
+
+/* --- Gateways --- */
+.bpmn-element.exclusive-gateway,
+.bpmn-element.parallel-gateway {
+    width: 50px;
+    height: 50px;
+    transform: rotate(45deg);
+    background: rgba(15, 20, 30, 0.7);
+    border: 1px solid rgba(0, 212, 255, 0.5);
+    box-shadow:
+        0 0 10px rgba(0, 212, 255, 0.1),
+        inset 0 0 10px rgba(0, 212, 255, 0.05);
+    backdrop-filter: blur(5px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.bpmn-element.exclusive-gateway svg,
+.bpmn-element.parallel-gateway svg {
+    transform: rotate(-45deg);
+    width: 60%;
+    height: 60%;
+    stroke: var(--accent-color);
+    filter: drop-shadow(0 0 2px var(--accent-color));
+    transition: all 0.3s;
+}
+
+/* --- Data Object --- */
+.bpmn-element.data-object {
+    width: 40px;
+    height: 50px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 2px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    position: relative;
+}
+
+.bpmn-element.data-object::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 8px 8px 0;
+    border-color: transparent rgba(255, 255, 255, 0.4) transparent transparent;
+}
+
+.bpmn-element.data-object svg {
+    width: 45%;
+    height: 45%;
+    stroke: rgba(255, 255, 255, 0.6);
+    filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.3));
+}
+
+/* --- System Object --- */
+.bpmn-element.system-object {
+    width: 40px;
+    height: 50px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 2px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    position: relative;
+}
+
+.bpmn-element.system-object svg {
+    width: 45%;
+    height: 45%;
+    stroke: rgba(255, 255, 255, 0.6);
+    filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.3));
+}
+
+/* --- SVG General --- */
+.bpmn-element svg {
+    width: 100%;
+    height: 100%;
+    fill: none;
+    transition: all 0.3s;
+}
+
+/* --- Text Overlay (Label) --- */
+.element-label {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: auto;
+    min-width: 100%;
+    max-width: 200px;
+    text-align: center;
+    pointer-events: none;
+    z-index: 20;
+    background: radial-gradient(circle, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.2) 80%, transparent 100%);
+    padding: 4px 8px;
+    border-radius: 4px;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 11px;
+    font-weight: 300;
+    text-shadow: 0 0 5px var(--accent-color);
+    line-height: 1.3;
+    white-space: pre;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.bpmn-element:hover .element-label,
+.bpmn-element.has-label .element-label {
+    opacity: 1;
+}
+
+.bpmn-element.exclusive-gateway .element-label,
+.bpmn-element.parallel-gateway .element-label {
+    transform: translate(-50%, -50%) rotate(-45deg);
+    min-width: 140%;
+}
+
+/* --- Selected State --- */
+.bpmn-element.selected {
+    border-color: #fff;
+    box-shadow:
+        0 0 0 1px #fff,
+        0 0 20px var(--accent-color),
+        inset 0 0 20px var(--accent-glow);
+    z-index: 100;
+}
+
+.bpmn-element.start-event.selected {
+    box-shadow: 0 0 20px rgba(76, 175, 80, 0.6);
+}
+
+.bpmn-element.end-event.selected {
+    box-shadow: 0 0 20px rgba(244, 67, 54, 0.6);
+}
+
+/* Hover Effects */
+.bpmn-element:hover {
+    z-index: 50;
+    border-color: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 0 15px var(--accent-glow);
+}
+
+.bpmn-element.exclusive-gateway:hover,
+.bpmn-element.parallel-gateway:hover {
+    transform: rotate(45deg) scale(1.1);
+}
+
+.bpmn-element:not(.exclusive-gateway):not(.parallel-gateway):not(.pool):hover {
+    transform: scale(1.1);
+}
+
+/* --- Connection Segment Handle --- */
+.connection-segment-handle {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: var(--accent-color);
+    border: 1px solid #fff;
+    border-radius: 50%;
+    z-index: 101;
+    cursor: grab;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 5px var(--accent-glow);
+    display: none;
+}
+
+.connection-segment-handle:hover {
+    transform: translate(-50%, -50%) scale(1.5);
+}
+
+.connection-segment-handle.active {
+    background: #fff;
+    transform: translate(-50%, -50%) scale(1.2);
+    cursor: grabbing;
+}
+
+/* --- Pool Element --- */
+.bpmn-element.pool {
+    width: 800px;
+    min-height: 100px;
+    background: rgba(255, 255, 255, 0.02);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 0;
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    justify-content: flex-start;
+    padding: 0;
+    cursor: move;
+}
+
+.bpmn-element.pool:hover {
+    transform: none;
+    border-color: rgba(0, 212, 255, 0.3);
+}
+
+.bpmn-element.pool.selected {
+    border-color: var(--accent-color);
+    box-shadow: 0 0 15px var(--accent-glow);
+}
+
+.pool-header {
+    width: 40px;
+    background: rgba(255, 255, 255, 0.05);
+    border-right: 2px solid rgba(255, 255, 255, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    flex-shrink: 0;
+}
+
+.pool-header-text {
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    font-weight: 600;
+    font-size: 13px;
+    color: var(--text-primary);
+    text-shadow: 0 0 5px var(--accent-glow);
+    letter-spacing: 1px;
+    white-space: nowrap;
+    padding: 10px 0;
+}
+
+.pool-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.pool-resize-handle {
+    position: absolute;
+    right: -4px;
+    top: 0;
+    bottom: 0;
+    width: 8px;
+    cursor: ew-resize;
+    background: transparent;
+    z-index: 50;
+}
+
+.pool-resize-handle:hover {
+    background: rgba(0, 212, 255, 0.3);
+}
+
+/* --- Lane Element --- */
+.lane {
+    width: 100%;
+    min-height: 100px;
+    background: rgba(255, 255, 255, 0.01);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+    display: flex;
+    flex-direction: row;
+    position: relative;
+}
+
+.lane:last-child {
+    border-bottom: none;
+}
+
+.lane-header {
+    width: 30px;
+    background: rgba(255, 255, 255, 0.03);
+    border-right: 1px solid rgba(255, 255, 255, 0.25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    flex-shrink: 0;
+}
+
+.lane-header-text {
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    font-weight: 500;
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.6);
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+    padding: 10px 0;
+}
+
+.lane-content {
+    flex: 1;
+    position: relative;
+    min-height: 100px;
+}
+
+.lane-resize-handle {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -4px;
+    height: 8px;
+    cursor: ns-resize;
+    background: transparent;
+    z-index: 50;
+}
+
+.lane-resize-handle:hover {
+    background: rgba(0, 212, 255, 0.3);
+}
+
+/* --- Connection Ports --- */
+.connection-port {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: var(--accent-color);
+    border: 1px solid #fff;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: opacity 0.2s, transform 0.2s;
+    cursor: crosshair;
+    z-index: 15;
+}
+
+.bpmn-element:hover .connection-port {
+    opacity: 1;
+}
+
+.connection-port:hover {
+    transform: translate(-50%, -50%) scale(1.5);
+    box-shadow: 0 0 8px var(--accent-glow);
+}
+
+.connection-port.top {
+    top: 0;
+    left: 50%;
+}
+
+.connection-port.right {
+    top: 50%;
+    right: 0;
+    left: auto;
+    transform: translate(50%, -50%);
+}
+
+.connection-port.right:hover {
+    transform: translate(50%, -50%) scale(1.5);
+}
+
+.connection-port.bottom {
+    bottom: 0;
+    top: auto;
+    left: 50%;
+    transform: translate(-50%, 50%);
+}
+
+.connection-port.bottom:hover {
+    transform: translate(-50%, 50%) scale(1.5);
+}
+
+.connection-port.left {
+    top: 50%;
+    left: 0;
+}
